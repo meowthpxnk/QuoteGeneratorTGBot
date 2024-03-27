@@ -1,0 +1,1 @@
+from .photo_gen import RandomPhotoGenerator

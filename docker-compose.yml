@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  mongodb-img:
+    image: mongo:7.0
+    user: "root"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ""
+      MONGO_INITDB_ROOT_PASSWORD: ""
+
+    privileged: true
+    restart: always
+    ports:
+      - "9999:27017"
+
+  telegram_client:
+    env_file:
+      - .env
+    environment:
+      MONGO_DB_URL: mongodb://mongodb-img:27017
+
+    build:
+      context: .
+
+    depends_on:
+      - mongodb-img
